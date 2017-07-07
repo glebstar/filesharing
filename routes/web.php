@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FileController@index');
+Route::get('/{id}.html', 'FileController@file');
+Route::get('/download/{id}', 'FileController@download');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
