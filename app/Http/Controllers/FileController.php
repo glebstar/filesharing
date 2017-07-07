@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 use App\File;
+use App\CheckIps;
 
 class FileController extends Controller
 {
@@ -24,11 +26,28 @@ class FileController extends Controller
         ]);
     }
 
-    public function download($id) {
+    public function download(Request $request, $id) {
         $file = File::where('public_id', $id)->first();
         if (! $file) {
             abort(404);
         }
+
+        // увеличиваем счётчики
+        /*
+        // количество всех скачек
+        $file->increment('cnt_view');
+
+        // количество оплачиваемых скачек
+        if (CheckIps::checkIpsReputation([$request->getClientIp()])) {
+            $user = User::where('id', $file->user_id)->first();
+            $user->increment('cnt_pay_view');
+            $user->save();
+
+            $file->increment('cnt_pay_view');
+        }
+
+        $file->save();
+        */
 
         $path = storage_path() . '/file/' . $file->name;
         file_put_contents($path, md5($id));
