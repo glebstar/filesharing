@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 use App\File;
-use App\CheckIps;
 
 class FileController extends Controller
 {
