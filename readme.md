@@ -8,7 +8,7 @@
 
 1. Склонировать проект
 2. composer install
-3. Расшарить директории storage, bootstrap/cache
+3. Расшарить директории storage, bootstrap/cache (chmod -R 777 storage && chmod 777 bootstrap/cache)
 4. Создать бд
 5. Создать файл .env (скопировать из .env.example)
 6. Сгенерировать ключ (php artisan key:generate)

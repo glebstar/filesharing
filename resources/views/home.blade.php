@@ -2,16 +2,23 @@
 
 @section('content')
 <div class="container">
+    <h1>Привет, {{ Auth::user()->login }}. Оплачиваемых скачек: {{ Auth::user()->cnt_pay_view }}</h1>
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    You are logged in!
-                </div>
-            </div>
-        </div>
+        <table class="table table-striped">
+            <tr>
+                <th>#</th>
+                <th>Имя файла</th>
+            @foreach($files as $file)
+                <tr>
+                    <td>{{ $file->id }}</td>
+                    <td><a href="/{{ $file->public_id }}.html">{{ $file->name }}</a></td>
+                </tr>
+                @endforeach
+                </tr>
+        </table>
+    </div>
+    <div class="row">
+        {{ $files->links() }}
     </div>
 </div>
 @endsection
