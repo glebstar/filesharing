@@ -10,6 +10,7 @@ class CheckIps
      *
      * @param array $ips
      * @return array
+     * @throws InvalidArgumentException
      */
     public static function checkIpsReputation (array $ips)
     {

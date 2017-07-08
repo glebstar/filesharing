@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class File extends Model
 {
@@ -22,7 +23,7 @@ class File extends Model
         }
 
         if ($isAddView) {
-            // добавить IP в список проверяемых
+            Storage::append('ips.txt', $this->id . ',' . $ip);
         }
 
         return $path;

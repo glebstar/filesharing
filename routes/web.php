@@ -18,3 +18,11 @@ Route::get('/download/{id}', 'FileController@download');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/aaa', function () {
+    $file = new SplFileObject(storage_path() . '/app/ips.txt');
+    $file->setFlags(SplFileObject::READ_CSV);
+    foreach ($file as $row) {
+        var_dump($row);
+    }
+});
