@@ -30,28 +30,8 @@ class FileController extends Controller
             abort(404);
         }
 
-        // увеличиваем счётчики
-        /*
-        // количество всех скачек
-        $file->increment('cnt_view');
-
-        // количество оплачиваемых скачек
-        if (CheckIps::checkIpsReputation([$request->getClientIp()])) {
-            $user = User::where('id', $file->user_id)->first();
-            $user->increment('cnt_pay_view');
-            $user->save();
-
-            $file->increment('cnt_pay_view');
-        }
-
-        $file->save();
-        */
-
-        $path = storage_path() . '/file/' . $file->name;
-        file_put_contents($path, md5($id));
-
-        return response()->download($path, $file->name, [
+        return response()->download($file->getPath(true, $request->getClientIp()), $file->name, [
             'Content-Type: text/plain'
-        ])->deleteFileAfterSend(true);
+        ]);
     }
 }
