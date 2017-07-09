@@ -20,6 +20,7 @@ class CountersTest extends TestCase
             $file->getPath(true, round(1, 5000));
         }
 
+        // запуск команды для обработки счётчиков
         $command = new CheckIps();
         $command->handle();
 
