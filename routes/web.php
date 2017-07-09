@@ -18,12 +18,3 @@ Route::get('/download/{id}', 'FileController@download');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/aaa', function () {
-    //$ips = Redis::get('ips');
-    //var_dump(explode('|', preg_replace('/\|$/', '', $ips)));
-    //Job::
-
-    $command = new App\Jobs\CheckIps();
-    $command->handle();
-});
