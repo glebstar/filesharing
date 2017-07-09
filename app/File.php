@@ -3,7 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
+use Redis;
+use App\Jobs\CheckIps;
 
 class File extends Model
 {
@@ -23,7 +24,10 @@ class File extends Model
         }
 
         if ($isAddView) {
-            Storage::append('ips.txt', $this->id . ',' . $ip);
+            Redis::append('ips', $this->id . ',' . $ip . '|');
+
+            // добавить задачу в очередь
+            dispatch(new CheckIps());
         }
 
         return $path;

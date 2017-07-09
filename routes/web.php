@@ -20,9 +20,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/aaa', function () {
-    $file = new SplFileObject(storage_path() . '/app/ips.txt');
-    $file->setFlags(SplFileObject::READ_CSV);
-    foreach ($file as $row) {
-        var_dump($row);
-    }
+    //$ips = Redis::get('ips');
+    //var_dump(explode('|', preg_replace('/\|$/', '', $ips)));
+    //Job::
+
+    $command = new App\Jobs\CheckIps();
+    $command->handle();
 });

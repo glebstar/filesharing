@@ -3,6 +3,7 @@
 ## Требования
 - php >= 5.6.4
 - И другие требования к Laravel 5.4: https://laravel.com/docs/5.4/installation
+- также требуется установленный Redis
 
 ## Установка
 
