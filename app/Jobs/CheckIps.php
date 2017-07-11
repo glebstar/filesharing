@@ -33,9 +33,10 @@ class CheckIps implements ShouldQueue
      */
     public function handle()
     {
-        $ips = explode('|', preg_replace('/\|$/', '', Redis::get('ips')));
-        if (count($ips) >= 1400) {
-            Redis::set('ips', '');
+        if (Redis::llen('ips') >= 1400) {
+            $ips = Redis::lrange('ips', 0, Redis::llen('ips')-1);
+
+            Redis::del('ips');
 
             $data = $ids = [];
 
