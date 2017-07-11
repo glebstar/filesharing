@@ -11,25 +11,23 @@ class File extends Model
     /**
      * Возвращает путь к файлу
      *
-     * @param bool $isAddView Нужно ли засчитывать скачивание файла
-     * @param string $ip IP адрес клиента
-     *
      * @return string
      */
-    public function getPath($isAddView = false, $ip = '') {
+    public function getPath() {
         $path = storage_path() . '/file/' . $this->name;
 
         if (!file_exists($path)) {
             file_put_contents($path, md5($this->public_id));
         }
 
-        if ($isAddView) {
-            Redis::append('ips', $this->id . ',' . $ip . '|');
-
-            // добавить задачу в очередь
-            dispatch(new CheckIps());
-        }
-
         return $path;
+    }
+
+    public function addView($ip) {
+        //Redis::append('ips', $this->id . ',' . $ip . '|');
+        Redis::rpush('ips', $this->id . ',' . $ip);
+
+        // добавить задачу в очередь
+        dispatch(new CheckIps());
     }
 }

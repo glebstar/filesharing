@@ -30,7 +30,9 @@ class FileController extends Controller
             abort(404);
         }
 
-        return response()->download($file->getPath(true, $request->getClientIp()), $file->name, [
+        $file->addView($request->getClientIp());
+
+        return response()->download($file->getPath(), $file->name, [
             'Content-Type: text/plain'
         ]);
     }

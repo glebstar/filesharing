@@ -17,7 +17,7 @@ class CountersTest extends TestCase
         // иммитируем скачивания
         for($i=0; $i<=1450; $i++) {
             $file = File::find(rand(1, 9));
-            $file->getPath(true, round(1, 5000));
+            $file->addView(round(1, 5000));
         }
 
         // запуск команды для обработки счётчиков

@@ -18,3 +18,8 @@ Route::get('/download/{id}', 'FileController@download');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/aaa', function () {
+    //Redis::del('ips');
+    var_dump(Redis::get('ips'));
+});
